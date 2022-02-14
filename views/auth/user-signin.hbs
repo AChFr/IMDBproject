@@ -1,0 +1,59 @@
+<h2>Sign up as a new user</h2>
+<form action="/auth/sign-up" method="POST" enctype="multipart/form-data">
+
+
+
+
+
+    <div class="card" style="width: 30rem;">
+        <div class="card-header">
+            <label for="username">Username</label>
+            <input id="username" class="input-field" type="text" name='username' placeholder="Choose your username"
+                required>
+
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <label class="label" for="email">E-mail</label>
+                <input id="email" class="input-field" type="email" name='email' placeholder="email" required>
+            </li>
+
+
+            <li class="list-group-item">
+                <label for="password1" class="label">Password</label>
+                <input id="password1" class="input-field" type="password" name='pwd1' placeholder="Choose a password"
+                    required>
+            </li>
+
+            <li class="list-group-item">
+                <label class="label" for="password2">Confirm password</label>
+                <input id="password2" class="input-field" type="password" name='pwd2' placeholder="Confirm the password"
+                    required>
+            </li>
+
+
+            <li class="list-group-item">
+                <label for="formFile" class="form-label">Upload a profile picture</label>
+                <input name="imgFile" class="form-control" type="file" id="formFile">
+            </li>
+
+            <li class="list-group-item">
+                <label class="label" for="description">Status</label><br>
+                <textarea id="description" name='description'> Update your status</textarea>
+
+            </li>
+
+
+        </ul>
+    </div>
+    <hr>
+    <input class="submit-btn btn btn-lg btn-warning edit" type="submit" value="CREATE ENTRY">
+    <br><br>
+    <a href="/">back</a>
+</form>
+{{#if errorMessage}}
+<div id="errorMessage">
+    <p>{{errorMessage}}</p>
+</div>
+{{/if}}

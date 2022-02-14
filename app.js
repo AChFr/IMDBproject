@@ -24,10 +24,11 @@ require("./config")(app);
 app.locals.title = "IMDBproject";
 
 // 👇 Start handling routes here
-const index = require("./routes/auth/route.auth");
+const index = require("./routes/route.index");
 app.use("/", index);
 
-
+const auth = require("./routes/auth/route.auth")
+app.use("/auth", auth)
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

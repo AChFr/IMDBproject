@@ -16,7 +16,7 @@ const userSchema = new Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
+
     },
 
     profileImg: {
@@ -27,26 +27,16 @@ const userSchema = new Schema(
     description: String,
 
     role: {
-      required: true,
       type: String,
       enum: ["USER", "ADMIN"],
       default: "USER"
     },
 
-    visitedPlaces: [{
-      name: String,
-      comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
-    }],
-    favoriteMovies: [{
-      title: String,
-      comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
-    }],
-    favoriteActors: [{
-      name: String,
-      comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
-    }],
-
-
+    favoritePlaces: [{ type: Schema.Types.ObjectId, ref: 'Place' }]
+    ,
+    favoriteMovies: [{ type: Schema.Types.ObjectId, ref: 'Movie' }]
+    ,
+    favoriteActors: [{ type: Schema.Types.ObjectId, ref: 'Actor' }]
 
   },
   {

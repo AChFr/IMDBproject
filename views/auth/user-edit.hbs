@@ -1,0 +1,53 @@
+<h2>Edit your profile</h2>
+<form action="/user/{{id}}/edit" method="POST">
+
+    <div class="card" style="width: 30rem;">
+        <div class="card-header">
+            <label for="username">Username</label>
+            <input id="username" class="input-field" type="text" name='username' value="{{user.username}}" required>
+
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <label class="label" for="email">E-mail</label>
+                <input id="email" class="input-field" type="email" name='email' value="{{user.email}}" required>
+            </li>
+            <li class="list-group-item">
+                <label for="passwordOld" class="label">Password</label>
+                <input id="passwordOld" class="input-field" type="password" name='oldPwd'
+                    placeholder="Enter your password" placeholder="Choose a new password" required>
+            </li>
+
+            <li class="list-group-item">
+                <label for="password1" class="label">Password</label>
+                <input id="password1" class="input-field" type="password" name='newPwd1'
+                    placeholder="Choose a new password" required>
+            </li>
+
+            <li class="list-group-item">
+                <label class="label" for="password2">Confirm password</label>
+                <input id="password2" class="input-field" type="password" name='newPwd2'
+                    placeholder="Confirm the new password" required>
+            </li>
+
+
+            <li class="list-group-item">
+                <label for="formFile" class="form-label">Upload a profile picture</label>
+                <input name="imgFile" class="form-control" type="file" id="formFile">
+            </li>
+
+            <li class="list-group-item">
+                <label class="label" for="description">Status</label><br>
+                <textarea id="description" name='description'> Update your status</textarea>
+
+            </li>
+
+
+        </ul>
+    </div>
+    <hr>
+    <input class="submit-btn btn btn-lg btn-warning edit" type="submit" value="EDIT PROFILE">
+    <br><br>
+    <a href="/">back</a>
+</form>
