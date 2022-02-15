@@ -102,6 +102,11 @@ router.post('/:id/edit', fileUploader.single("imgFile"), (req, res, next) => {
     //     .catch(err => next(err))
 })
 
+// User details
 
+// router.get('/user/:id', (req, res, next) => {
+
+//     const {id} = 
+// })
 
 module.exports = router
