@@ -181,5 +181,15 @@ router.post('/user/:id/edit', (req, res, next) => {
     //     .catch(error => next(error))
 })
 
+// User details
+router.get('/user/:id', (req, res, next) => {
+
+    const { id } = req.params
+    
+    User
+        .findById(id)
+        .then(user => res.render('user-details', user))
+        .catch(err => console.log(err))
+})
 
 module.exports = router
