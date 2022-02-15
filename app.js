@@ -27,6 +27,7 @@ app.locals.title = "IMDBproject";
 require('./config/session.config')(app)
 
 // 👇 Start handling routes here
+
 const index = require("./routes/route.index");
 app.use("/", index);
 
@@ -35,6 +36,11 @@ app.use("/auth", auth)
 
 const user = require("./routes/user/route.user")
 app.use("/user", user)
+
+const movieApi = require("./routes/api/route.api")
+app.use(`/https://imdb-api.com/API/AdvancedSearch/${process.env.IMDB_KEY}`, movieApi)
+
+
 
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
