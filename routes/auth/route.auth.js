@@ -3,193 +3,116 @@ const bcrypt = require('bcryptjs')
 const User = require("../../models/User.model")
 const fileUploader = require('../../config/cloudinary.config')
 const transporter = require("../../config/transporter.config")
+const { hasNumber } = require("../../utils/index")
 const saltRounds = 10
 
 User.syncIndexes();
 
-// Signup
+///////////////////////  A U T H  C R E A T E   U S E R ///////////
 
-//form
-router.get('/sign-up', (req, res, next) => res.render('auth/user-signin'))
-
-
-
-
-//create
-
-
+router.get('/sign-up', (req, res, next) => res.render('auth/auth-signin'))
 
 router.post('/sign-up', fileUploader.single("imgFile"), (req, res, next) => {
 
 
-    const { username, email, pwd1, pwd2, imgFile, description } = req.body
+    const { username, email, pwd1, pwd2, imgFile, } = req.body
 
 
-    // if (pwd1 !== pwd2) {
-    //     req.body.errorMessage = "the passwords do not match"
-    //     res.render('auth/user-signin', req.body)
-    //     return
-    // }
+    // if (pwd1.length < 8) {
+    //     req.body.errorMessage = "The password must be at least 8 characters long"
+    //     res.render('auth/auth-signin', req.body)}
+    // else if (!hasNumber(pwd1)) {
+    //     req.body.errorMessage = "The password must contain a number"
+    //     console.log(req.body)
+    //     res.render('auth/auth-signin', req.body)}
 
-    User
-        .findOne({ username })
-        //validation username
-        .then(result => {
-            if (!result) { next() }
-            else {
-                req.body.errorMessage = "This username is already in use"
-                res.render('auth/user-signin', req.body)
-            }
-        })
-        //validation password
+    //else
+    if (pwd1 !== pwd2) {
+        req.body.errorMessage = "the passwords do not match"
+        res.render('auth/auth-signin', req.body)
+        return;
+    }
 
-        // .then(()=>{
-        //     if (pwd1.length < 8 ||!hasNumber(pwd1)){
 
-        //         req.body.errorMessage = "the password must at least 8 characters long and include a number"
-        //         res.render('auth/user-signin', req.body)
-        //         return
+    else {
+        User
 
-        //     }
-        // })
-        .then(() => {
-            if (pwd1 !== pwd2) {
-                req.body.errorMessage = "the passwords do not match"
-                res.render('auth/user-signin', req.body)
+            .findOne({ username })
+            .then(result => {
 
-            }
-            else { next() }
-        })
-        .then(bcrypt.genSalt(saltRounds))
-        .then(salt => bcrypt.hash(pwd1, salt))
-        .then(hashedPassword => User.create({
-            ...req.body, password: hashedPassword,
-            profileImg: req.file?.path || 'https://res.cloudinary.com/dpfx8essu/image/upload/v1644855394/kcijzssglljtiteaklva.png'
-        }))
-        .then(transporter.sendMail({
-            from: "imdbprojectteam@gmail.com",
-            to: email,
-            subject: `Welcome to IMDBProject!`,
-            text: `${username}, welcome to IMDBProject! Your Password is ${pwd1}`,
-            html: "<p>" + `${username}, welcome to IMDBProject! Your Password is ${pwd1}` + "</p>"
 
-        }))
-        .then(() => res.redirect('/'))
-        .catch(error => next(error))
+                //por alguna razon, a pesar de entrar en el if, no hace el res render
 
+                if (result) {
+
+                    req.body.errorMessage = "This username is already in use"
+                    console.log(" E S T O    E S     E L   REQ ", req.body)
+                    res.render('auth/auth-signin', req.body)
+                    return;
+                }
+
+                else {
+                    return bcrypt.genSalt(saltRounds)
+                }
+            })
+            //salta aquí, intenta ejecutar el hash, da error a pesar de que debería saltar el res.render del if
+
+            .then(salt => salt && bcrypt.hash(pwd1, salt))
+            .then(hashedPassword => {
+                console.log('asdfasdfasdfasdfasdfasdfasdf')
+                return User.create({
+                    ...req.body, password: hashedPassword,
+                    profileImg: req.file?.path || 'https://res.cloudinary.com/dpfx8essu/image/upload/v1644855394/kcijzssglljtiteaklva.png'
+                })
+            })
+            .then(() => {
+                transporter.sendMail({
+                    from: "imdbprojectteam@gmail.com",
+                    to: email,
+                    subject: `Welcome to IMDBProject!`,
+                    text: `${username}, welcome to IMDBProject! Your Password is ${pwd1}`,
+                    html: "<p>" + `${username}, welcome to IMDBProject! Your Password is ${pwd1}` + "</p>"
+                })
+
+                res.redirect('/')
+
+            })
+            .catch(error => next(error))
+    }
 })
 
-
-
-// Login
-router.get('/log-in', (req, res, next) => res.send('auth/login'))
-
+/////////////////////// A U T H    L O G   I N  /////////////////////////
+router.get('/log-in', (req, res, next) => res.render('auth/auth-login'))
 
 router.post('/log-in', (req, res, next) => {
 
-    const { email, userPwd } = req.body
+    const { username, pwd1 } = req.body
 
     User
-        .findOne({ email })
+        .findOne({ username })
         .then(user => {
             if (!user) {
-                //modificar
-                res.send('auth/login error Email no registrado en la Base de Datos',
-                    //  { errorMessage: 'Email no registrado en la Base de Datos' }
-                )
+                req.body.errorMessage = "User not found"
+                res.render('auth/auth-login', req.body)
                 return
-            } else if (bcrypt.compareSync(userPwd, user.password) === false) {
-                res.send('auth/login Email no registrado en la Base de Datos'
-                    //, { errorMessage: 'Email no registrado en la Base de Datos' }
-                )
+            } else if (bcrypt.compareSync(pwd1, user.password) === false) {
+                req.body.errorMessage = "Invalid password"
+                res.render('auth/auth-login', req.body)
+
                 return
             } else {
+
                 req.session.currentUser = user
-                res.send('/perfil de usuario')
+                res.render('/perfil de usuario')
             }
         })
         .catch(error => next(error))
 })
 
 
-// Logout
+//////////////////////////  A U T H    L O G   O U T   /////////////////////
 router.post('/log-out', (req, res, next) => {
     req.session.destroy(() => res.redirect('/log-in'))
-})
-
-// Edit user
-router.get('/user/:id/edit', (req, res, next) => {
-
-    const { id } = req.params
-
-    User
-        .findById(id)
-        .then(user => res.render('auth/user-edit', user))
-        .catch(error => next(error))
-})
-
-router.post('/user/:id/edit', (req, res, next) => {
-
-    const { id } = req.params
-    const { username, email, newpwd1, newpwd2, imgFile, description } = req.body
-
-    const data = {}
-
-    User
-        .findById(id)
-        .then(result => {
-            result = data
-            console.log(data)
-        })
-        .catch(err => next(err))
-
-
-    // bcrypt
-    //     .genSalt(saltRounds)
-    //     .then(salt => bcrypt.hash(oldPwd, salt))
-    //     .then(hashedOldPwd => {
-    //         if (hashedOldPwd !== data) { }
-    //     })
-
-
-
-
-    // User
-    //     .findByIdAndUpdate(id, { username, email, oldPwd, newpwd1, newpwd2, imgFile, description }, { new: true })
-    //     .then(result => {
-    //         if (!result) { next() }
-    //         else {
-    //             req.body.errorMessage = "This username is already in use"
-    //             res.render('auth/user-edit', req.body)
-    //         }
-    //     })
-    //     .then(() => {
-    //         if (pwd1 !== pwd2) {
-    //             req.body.errorMessage = "the passwords do not match"
-    //             res.render('auth/user-edit', req.body)
-    //             return
-    //         }
-    //     }
-    //     )
-    //     .then(bcrypt.genSalt(saltRounds))
-    //     .then(salt => bcrypt.hash(pwd1, salt))
-    //     .then(hashedPassword => User.create({
-    //         ...req.body, password: hashedPassword,
-    //         profileImg: req.file?.path || 'https://res.cloudinary.com/dpfx8essu/image/upload/v1644855394/kcijzssglljtiteaklva.png'
-    //     }))
-    //     .then(updatedUser => res.redirect(`/user/${updatedUser.id}`))
-    //     .catch(error => next(error))
-})
-
-// User details
-router.get('/user/:id', (req, res, next) => {
-
-    const { id } = req.params
-    
-    User
-        .findById(id)
-        .then(user => res.render('user-details', user))
-        .catch(err => console.log(err))
 })
 
 module.exports = router

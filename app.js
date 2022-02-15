@@ -23,12 +23,19 @@ require("./config")(app);
 
 app.locals.title = "IMDBproject";
 
+// Session config
+require('./config/session.config')(app)
+
 // 👇 Start handling routes here
 const index = require("./routes/route.index");
 app.use("/", index);
 
 const auth = require("./routes/auth/route.auth")
 app.use("/auth", auth)
+
+const user = require("./routes/user/route.user")
+app.use("/user", user)
+
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

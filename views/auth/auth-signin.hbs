@@ -8,15 +8,16 @@
     <div class="card" style="width: 30rem;">
         <div class="card-header">
             <label for="username">Username</label>
-            <input id="username" class="input-field" type="text" name='username' placeholder="Choose your username"
-                required>
+            <input id="username" class="input-field" type="text" name='username' value="{{username}}"
+                placeholder="Choose a username" required>
 
         </div>
 
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <label class="label" for="email">E-mail</label>
-                <input id="email" class="input-field" type="email" name='email' placeholder="email" required>
+                <input id="email" class="input-field" type="email" name='email' value="{{email}}" placeholder="email"
+                    required>
             </li>
 
 
@@ -38,11 +39,7 @@
                 <input name="imgFile" class="form-control" type="file" id="formFile">
             </li>
 
-            <li class="list-group-item">
-                <label class="label" for="description">Status</label><br>
-                <textarea id="description" name='description'> Update your status</textarea>
 
-            </li>
 
 
         </ul>

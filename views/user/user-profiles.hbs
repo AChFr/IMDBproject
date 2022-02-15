@@ -1,0 +1,27 @@
+<h1>LISTA DE USUARIOS</h1>
+
+
+<ul class="row">
+
+
+    {{#each users}}
+
+    <li class=" col-md-3 card text-center text-dark bg-light mb-3">
+        <img src={{profileImg}} class=" card-img-top" alt="{{username}} Pic">
+        <div class="card-body">
+            <h5 class="card-title">{{username}}</h5>
+
+            <a href="/user/{{id}}/edit" class="btn btn-primary btn-dark">edit</a>
+        </div>
+
+    </li>
+    {{/each}}
+
+
+</ul>
+
+{{#if errorMessage}}
+<div id="errorMessage">
+    <p>{{errorMessage}}</p>
+</div>
+{{/if}}

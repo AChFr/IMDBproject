@@ -1,17 +1,17 @@
 <h2>Edit your profile</h2>
-<form action="/user/{{id}}/edit" method="POST">
+<form action="/user/{{_id}}/edit" method="POST">
 
     <div class="card" style="width: 30rem;">
         <div class="card-header">
             <label for="username">Username</label>
-            <input id="username" class="input-field" type="text" name='username' value="{{user.username}}" required>
+            <input id="username" class="input-field" type="text" name='username' value="{{username}}" required>
 
         </div>
 
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <label class="label" for="email">E-mail</label>
-                <input id="email" class="input-field" type="email" name='email' value="{{user.email}}" required>
+                <input id="email" class="input-field" type="email" name='email' value="{{email}}" required>
             </li>
             <li class="list-group-item">
                 <label for="passwordOld" class="label">Password</label>
@@ -20,13 +20,13 @@
             </li>
 
             <li class="list-group-item">
-                <label for="password1" class="label">Password</label>
+                <label for="password1" class="label">New password</label>
                 <input id="password1" class="input-field" type="password" name='newPwd1'
                     placeholder="Choose a new password" required>
             </li>
 
             <li class="list-group-item">
-                <label class="label" for="password2">Confirm password</label>
+                <label class="label" for="password2">Confirm new password</label>
                 <input id="password2" class="input-field" type="password" name='newPwd2'
                     placeholder="Confirm the new password" required>
             </li>
@@ -51,3 +51,8 @@
     <br><br>
     <a href="/">back</a>
 </form>
+{{#if errorMessage}}
+<div id="errorMessage">
+    <p>{{errorMessage}}</p>
+</div>
+{{/if}}
