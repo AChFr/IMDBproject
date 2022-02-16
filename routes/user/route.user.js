@@ -26,7 +26,17 @@ router.get('/profiles', isLoggedIn, (req, res, next) => {
         .catch(error => next(error))
 })
 
+//////////////////////////////  U S E R  DELETE  ////////////////
 
+router.post('/user/:id/delete', isLoggedIn, checkRole('ADMIN'), (req, res, next) => {
+
+    const { id } = req.params
+    
+    User
+        .findByIdAndDelete(id)
+        .then(() => res.redirect('/user/profiles'))
+        .catch(err => next(err))
+})
 
 //////////////////////////////  U S E R  E D I T  ////////////////
 router.get('/:id/edit', (req, res, next) => {

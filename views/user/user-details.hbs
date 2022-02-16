@@ -37,6 +37,10 @@
         {{#if isAdmin}}
         <a href="/user/{{id}}/edit" class="btn btn-primary btn-dark">Edit profile</a>
         {{/if}}
+
+        {{#if isAdmin}}
+        <a href="/user/{{id}}/delete" class="btn btn-primary btn-dark">Delete profile</a>
+        {{/if}}
     
     <br><br>
     <a href="/">back</a>
