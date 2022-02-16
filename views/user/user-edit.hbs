@@ -39,7 +39,7 @@
 
             <li class="list-group-item">
                 <label class="label" for="description">Status</label><br>
-                <textarea id="description" name='description'> Update your status</textarea>
+                <textarea id="description" name='description' value="{{description}}"></textarea>
 
             </li>
 
@@ -47,7 +47,10 @@
         </ul>
     </div>
     <hr>
-    <input class="submit-btn btn btn-lg btn-warning edit" type="submit" value="EDIT PROFILE">
+        <div>
+        <button class="nav-link" type="submit" >Save changes</button>
+        </div>
+        
     <br><br>
     <a href="/">back</a>
 </form>
