@@ -103,7 +103,7 @@ router.post('/log-in', (req, res, next) => {
             } else {
 
                 req.session.currentUser = user
-                res.render('/perfil de usuario')
+                res.render('index')
             }
         })
         .catch(error => next(error))

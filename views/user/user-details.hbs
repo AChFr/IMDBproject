@@ -1,0 +1,47 @@
+<h1>Welcome to {{username}}'s profile</h1>
+
+    <div class="card" style="width: 30rem;">
+
+        <div class="card-header">
+            <label for="username">Username</label>
+            <p>{{username}}</p>
+
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <label class="label" for="email">E-mail</label>
+                <p>{{email}}</p>
+            </li>
+
+            <li class="list-group-item">
+                <label for="formFile" class="form-label">Profile picture</label>
+                <img src="{{profileImg}}">
+            </li>
+
+            <li class="list-group-item">
+                <label class="label" for="description">Status</label><br>
+                <p>{{description}}</p>
+
+            </li>
+
+        </ul>
+    </div>
+
+    <hr>
+    
+        {{#if isOwn}}
+        <a href="/user/{{id}}/edit" class="btn btn-primary btn-dark">Edit profile</a>
+        {{/if}}
+
+        {{#if isAdmin}}
+        <a href="/user/{{id}}/edit" class="btn btn-primary btn-dark">Edit profile</a>
+        {{/if}}
+
+        {{#if isAdmin}}
+        <a href="/user/{{id}}/delete" class="btn btn-primary btn-dark">Delete profile</a>
+        {{/if}}
+    
+    <br><br>
+    <a href="/">back</a>
+</form>

@@ -1,3 +1,5 @@
+const mongoose = require('mongoose')
+
 const hasNumber = string => {
     return /\d/.test(string);
 }
@@ -16,12 +18,10 @@ const formatDate = date => {
 const capitalize = text => text.charAt(0).toUpperCase() + text.substring(1).toLowerCase()
 
 
+const isUser = user => user.role === 'USER'
+const isAdmin = user => user.role === 'ADMIN'
+
+const isOwn = (userId, id) => userId === id
 
 
-
-
-
-
-
-
-module.exports = { hasNumber, capitalize, formatDate }
+module.exports = { hasNumber, capitalize, formatDate, isUser, isAdmin, isOwn }

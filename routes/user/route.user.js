@@ -1,25 +1,42 @@
+const { isLoggedIn, checkRole } = require("../../middleware/route-guard")
 const router = require("express").Router()
 const bcrypt = require('bcryptjs')
 const User = require("../../models/User.model")
 const fileUploader = require('../../config/cloudinary.config')
 const transporter = require("../../config/transporter.config")
-const { hasNumber } = require("../../utils/index")
+const { hasNumber, isUser, isAdmin, isOwn } = require("../../utils/index")
 const saltRounds = 10
 
 User.syncIndexes();
 
 //////////////////////////////  U S E R  P R O F I L E S  ////////////////
-router.get('/profiles', (req, res, next) => {
+router.get('/profiles', isLoggedIn, (req, res, next) => {
 
     const { id } = req.params
+    const currentUser = req.session.currentUser
 
     User
         .find()
-        .then(users => res.render('user/user-profiles', { users }))
+        .then(users => res.render('user/user-profiles', {
+            users,
+            user: req.session.currentUser,
+            isUser: isUser(req.session.currentUser),
+            isAdmin: isAdmin(req.session.currentUser)
+        }))
         .catch(error => next(error))
 })
 
+//////////////////////////////  U S E R  DELETE  ////////////////
 
+router.post('/user/:id/delete', isLoggedIn, checkRole('ADMIN'), (req, res, next) => {
+
+    const { id } = req.params
+    
+    User
+        .findByIdAndDelete(id)
+        .then(() => res.redirect('/user/profiles'))
+        .catch(err => next(err))
+})
 
 //////////////////////////////  U S E R  E D I T  ////////////////
 router.get('/:id/edit', (req, res, next) => {
@@ -32,36 +49,31 @@ router.get('/:id/edit', (req, res, next) => {
         .catch(error => next(error))
 })
 
-router.post('/:id/edit', fileUploader.single("imgFile"), (req, res, next) => {
+router.post('/:id/edit', isLoggedIn, fileUploader.single("imgFile"), (req, res, next) => {
 
     const { id } = req.params
     const { username, email, oldPwd, newPwd1, newPwd2, imgFile, description } = req.body
 
 
-
-    let editedUser = {}
-
     User
-        .findById(id)
-        .then(result => {
-            editedUser = result
-
-            return User.findOne({ username })
-        })
+        .findByIdAndUpdate(id, { username, email, oldPwd, newPwd1, newPwd2, imgFile, description }, { new: true })
+        .then(updatedUser => res.redirect(`/user/profiles`))
+        .catch(err => next(err))
+        
         ///// checks if the new username is already in use///
-        .then(respuesta => {
+        // .then(respuesta => {
 
-            console.log(" U N O ", editedUser)
-            console.log(" D O S ", respuesta)
-            if (respuesta === editedUser) {
-                editedUser.errorMessage = "This username is already in use"
-                res.render('user/user-edit', editedUser)
-            }
-            else {
+        //     console.log(" U N O ", editedUser)
+        //     console.log(" D O S ", respuesta)
+        //     if (respuesta === editedUser) {
+        //         editedUser.errorMessage = "This username is already in use"
+        //         res.render('user/user-edit', editedUser)
+        //     }
+        //     else {
 
-                res.redirect("/user/profiles")
-            }
-        })
+        //         res.redirect("/user/profiles")
+        //     }
+        // })
 
     /////////// checks the passwords ////////////////
 
@@ -103,5 +115,22 @@ router.post('/:id/edit', fileUploader.single("imgFile"), (req, res, next) => {
 })
 
 
+//////////////////////////  USER DETAILS  /////////////////////
+
+router.get('/:id', isLoggedIn, (req, res, next) => {
+    
+    const { id } = req.params
+    
+    User
+        .findById(id)
+        // .then(user => res.render('user/user-details', user))
+        .then(user => {
+            user.isOwn = isOwn(req.session.currentUser._id, id)
+            user.isAdmin = isAdmin(req.session.currentUser)
+
+            res.render('user/user-details', user)
+        })
+        .catch(error => next(error))
+})
 
 module.exports = router
