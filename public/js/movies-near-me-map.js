@@ -117,8 +117,13 @@ function cardFormer(elm) {
 
     let newTitle = document.createElement("div") //titulo
     newTitle.innerText = `titulo ${elm.title}` // titulo
-    let = document.createElement("div")
-    newOcc.innerText = `OCCUPATION: ${elm.occupation}`
+
+    let newActors = document.createElement("ul") //actores
+    elm.starlist.forEach((star, idx) => {
+
+
+    })
+    newActors.innerText = `OCCUPATION: ${elm.occupation}`
     let newCartoon = document.createElement("div")
     newCartoon.innerText = `CARTOON: ${elm.cartoon}`
     let newWeapon = document.createElement("div")
