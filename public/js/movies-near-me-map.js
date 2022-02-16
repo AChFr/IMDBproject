@@ -115,8 +115,8 @@ function cardFormer(elm) {
     let newCard = document.createElement("div") //card
     newCard.setAttribute('class', "movie-info") //card
 
-    let newTitle = document.createElement("div") //
-    newTitle.innerText = `titulo ${elm.title}`
+    let newTitle = document.createElement("div") //titulo
+    newTitle.innerText = `titulo ${elm.title}` // titulo
     let = document.createElement("div")
     newOcc.innerText = `OCCUPATION: ${elm.occupation}`
     let newCartoon = document.createElement("div")
