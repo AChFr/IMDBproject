@@ -15,9 +15,9 @@
   animation: showFromBottom 6s forwards;
 }
 
-
-
-
+#profileImg {
+  width: 100%
+}
 
 @keyframes  showFromBottom {
   0% {

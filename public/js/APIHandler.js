@@ -1,6 +1,5 @@
 class APIHandler {
 
-
     constructor() {
         this.axiosApp = axios.create({
             baseURL: `https://imdb-api.com/API/AdvancedSearch/k_3hj01a38`
@@ -9,7 +8,6 @@ class APIHandler {
     }
 
     getMoviesByLocation(currentLocation) {
-
 
         return this.axiosApp.get(`?locations=${currentLocation}`)
     }

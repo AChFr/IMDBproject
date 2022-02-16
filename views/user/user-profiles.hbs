@@ -1,8 +1,6 @@
 <h1>LISTA DE USUARIOS</h1>
 
-
 <ul class="row">
-
 
     {{#each users}}
 
@@ -11,13 +9,12 @@
         <div class="card-body">
             <h5 class="card-title">{{username}}</h5>
 
-            <a href="/user/{{id}}" class="btn btn-primary btn-dark">Profile details</a>
+            <a href="/{{id}}" class="btn btn-primary btn-dark">Profile details</a>
         
         </div>
 
     </li>
     {{/each}}
-
 
 </ul>
 

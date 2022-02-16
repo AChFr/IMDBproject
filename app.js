@@ -31,13 +31,13 @@ require('./config/session.config')(app)
 const index = require("./routes/route.index");
 app.use("/", index);
 
-const auth = require("./routes/auth/route.auth")
-app.use("/auth", auth)
+const auth = require("./routes/auth.routes")
+app.use("/", auth)
 
-const user = require("./routes/user/route.user")
-app.use("/user", user)
+const user = require("./routes/user.routes")
+app.use("/", user)
 
-const movieApi = require("./routes/api/route.api")
+const movieApi = require("./routes/api.routes")
 app.use(`/https://imdb-api.com/API/AdvancedSearch/${process.env.IMDB_KEY}`, movieApi)
 
 
