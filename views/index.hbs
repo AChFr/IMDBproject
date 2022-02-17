@@ -1,10 +1,15 @@
-<p>Welcome Ironhacker!</p>
+<div class="landing-title">
+<p id="landing-title">Welcome to FilmLoc_</p>
+</div>
+<div class="landing-subtitle">
+<p id="landing-subtitle">Your favorite filming locations just one click away</p>
+</div>
 
-<a id="index-buttons" href="/auth/sign-up">CREAR</a>
+{{!-- <a id="index-buttons" href="/auth/sign-up">CREAR</a>
 <a id="index-buttons" href="/auth/log-in">LOGIN</a>
-<a id="index-buttons" href="/user/profiles">PROFILES</a>
+<a id="index-buttons" href="/user/profiles">PROFILES</a> --}}
 
-
+<div id="slider">
 <div class="map-buttons ">
     <figure class="main-map"></figure>
 
@@ -15,73 +20,70 @@
     </div>
 </div>
 
-<div class="results ">
-    <article class="results-neighborhood inactive">
+    <div class="results ">
+        <article class="results-neighborhood inactive">
 
-        <div id="carousel-neighborhood" class="carousel slide" data-bs-ride="carousel">
+            <div id="carousel-neighborhood" class="carousel slide" data-bs-ride="carousel">
 
-            <div class="carousel-inner  films" id="results-neighborhood">
-                {{!-- I N S E R T I O N S --}}
+                <div class="carousel-inner films" id="results-neighborhood">
+                    {{!-- I N S E R T I O N S --}}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-neighborhood"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-neighborhood"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-neighborhood"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-neighborhood"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
 
-    </article>
+        </article>
 
-    <article class="results-sublocality inactive">
+        <article class="results-sublocality inactive">
 
-        <div id="carousel-sublocality" class="carousel slide" data-bs-ride="carousel">
+            <div id="carousel-sublocality" class="carousel slide" data-bs-ride="carousel">
 
-            <div class="carousel-inner  films" id="results-sublocality">
-                {{!-- I N S E R T I O N S --}}
+                <div class="carousel-inner  films" id="results-sublocality">
+                    {{!-- I N S E R T I O N S --}}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-sublocality"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-sublocality"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-sublocality"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-sublocality"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
 
-    </article>
+        </article>
 
-    <article class="results-locality inactive">
+        <article class="results-locality inactive">
 
-        <div id="carousel-locality" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner  films" id="results-locality">
-                {{!-- I N S E R T I O N S --}}
+            <div id="carousel-locality" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner  films" id="results-locality">
+                    {{!-- I N S E R T I O N S --}}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-locality"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel-locality"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carousel-locality"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carousel-locality"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
 
-    </article>
-</div>
+        </article>
+    </div>
 </main>
-
-
-
 
 <script src="/js/movies-near-me-map.js"></script>
 
