@@ -1,11 +1,19 @@
 const router = require("express").Router()
 
 
-router.get("/:id", (req, res, next) => {
+router.get("/film/:movieId", (req, res, next) => {
+    const { movieId } = req.params
+    console.log({ movieId })
+    res.render('film/movie-detail', { movieId })
 
-    res.send(" D E T A  LL E S ")
 })
 
+router.get("/actor/:actorId", (req, res, next) => {
+    const { actorId } = req.params
+    console.log({ actorId })
+    res.render('film/actor-detail', { actorId })
+
+})
 
 
 module.exports = router;

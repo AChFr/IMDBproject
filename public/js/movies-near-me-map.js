@@ -2,7 +2,7 @@
 
 let map, geocoder, infowindow, address, googleResponses
 
-const handler = new APIHandler()
+//const handler = new APIHandler()
 
 function initMap() {
     paintMap()
@@ -96,18 +96,16 @@ function cardFormer(selector, arr) {
 
         let newImage = document.createElement("figure")
         newImage.innerHTML = `<img src="${elm.image}" class="d-block w-100" alt="${elm.title} image">` //imagen
-        let newCaption = document.createElement("div")//caption
+        let newCaption = document.createElement("div")
         newCaption.innerHTML = `<h5>${elm.title}</h5> <p>${elm.stars}</p>`
 
         newCarrouselItem.appendChild(newImage)
-        console.log("imagen adjuntada")
+
         newCarrouselItem.appendChild(newCaption)
-        console.log("caption adjuntada")
 
 
         carrousel.appendChild(newCarrouselItem)
 
-        console.log("todo insertado")
     })
     carrousel.firstElementChild.classList.add("active")
 }

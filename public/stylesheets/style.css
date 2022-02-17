@@ -14,6 +14,9 @@ body {
   flex-direction: row;
 }
 
+li{list-style: none;}
+a {color: inherit;
+text-decoration: none;}
 h1{
   color: white;
   text-align: center;
@@ -34,7 +37,6 @@ h1{
   display: flex;
 
 }
-
 
 
 .map-buttons{
@@ -65,12 +67,12 @@ h1{
 }
 
 
-#result-random{
- 
-  height: 400px;
+
+
+#image-random {
+  height:300px; 
+  object-fit:cover;
 }
-
-
 
 
 
