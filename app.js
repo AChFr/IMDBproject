@@ -37,12 +37,6 @@ app.use("/", auth)
 const user = require("./routes/user.routes")
 app.use("/", user)
 
-const movieApi = require("./routes/api.routes")
-app.use(`/https://imdb-api.com/API/AdvancedSearch/${process.env.IMDB_KEY}`, movieApi)
-
-
-
-
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
