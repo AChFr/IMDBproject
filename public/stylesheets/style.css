@@ -1,3 +1,32 @@
+body {
+  background-color: rgb(60, 79, 116);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.navbar{
+  background: linear-gradient(to right, #f7971e, #ffd200);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 50px;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+}
+
+h1{
+  color: white;
+  text-align: center;
+}
+
+.signup {
+  margin-left: 32%;
+}
+
+.logout {
+  border: 0;
+  background-color: transparent;
+}
 
 .main-map{
   height: 600px;

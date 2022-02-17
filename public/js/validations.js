@@ -11,14 +11,6 @@ username.onsubmit = e => {
     inputValue.match(/^\d{4}$/) ? console.log('username validation') : alert("Username must contain at least 4 characters.")
 }
 
-email.onsubmit = e => {
-
-    e.preventDefault()
-
-    const inputValue = e.target[0].value
-    inputValue.match(/^\S+@\S+\.\S+$/) ? console.log('email validation') : alert("Invalid email format. Please, try again.")
-}
-
 password1.onsubmit = e => {
 
     e.preventDefault()
