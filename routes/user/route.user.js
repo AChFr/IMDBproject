@@ -31,7 +31,7 @@ router.get('/profiles', isLoggedIn, (req, res, next) => {
 router.post('/user/:id/delete', isLoggedIn, checkRole('ADMIN'), (req, res, next) => {
 
     const { id } = req.params
-    
+
     User
         .findByIdAndDelete(id)
         .then(() => res.redirect('/user/profiles'))
@@ -59,21 +59,21 @@ router.post('/:id/edit', isLoggedIn, fileUploader.single("imgFile"), (req, res, 
         .findByIdAndUpdate(id, { username, email, oldPwd, newPwd1, newPwd2, imgFile, description }, { new: true })
         .then(updatedUser => res.redirect(`/user/profiles`))
         .catch(err => next(err))
-        
-        ///// checks if the new username is already in use///
-        // .then(respuesta => {
 
-        //     console.log(" U N O ", editedUser)
-        //     console.log(" D O S ", respuesta)
-        //     if (respuesta === editedUser) {
-        //         editedUser.errorMessage = "This username is already in use"
-        //         res.render('user/user-edit', editedUser)
-        //     }
-        //     else {
+    ///// checks if the new username is already in use///
+    // .then(respuesta => {
 
-        //         res.redirect("/user/profiles")
-        //     }
-        // })
+    //     console.log(" U N O ", editedUser)
+    //     console.log(" D O S ", respuesta)
+    //     if (respuesta === editedUser) {
+    //         editedUser.errorMessage = "This username is already in use"
+    //         res.render('user/user-edit', editedUser)
+    //     }
+    //     else {
+
+    //         res.redirect("/user/profiles")
+    //     }
+    // })
 
     /////////// checks the passwords ////////////////
 
@@ -118,9 +118,9 @@ router.post('/:id/edit', isLoggedIn, fileUploader.single("imgFile"), (req, res, 
 //////////////////////////  USER DETAILS  /////////////////////
 
 router.get('/:id', isLoggedIn, (req, res, next) => {
-    
+
     const { id } = req.params
-    
+
     User
         .findById(id)
         // .then(user => res.render('user/user-details', user))

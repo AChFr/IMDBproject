@@ -29,6 +29,7 @@ router.post('/sign-up', fileUploader.single("imgFile"), (req, res, next) => {
     //else
     if (pwd1 !== pwd2) {
         req.body.errorMessage = "the passwords do not match"
+        // res.render('auth/auth-signin', { data: req.body, errorMessage: "the passwords do not match" })
         res.render('auth/auth-signin', req.body)
         return;
     }

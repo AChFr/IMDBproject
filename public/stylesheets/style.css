@@ -1,9 +1,42 @@
 
-.main-map{
-  height: 600px;
-  background-color: bisque;
-  width: 95%;
+.main-page{
+  display: flex;
+
 }
+
+.map-buttons{
+  
+  width: 33%;
+  padding: 15px
+}
+
+.google-btn{
+  width:100%
+}
+
+.results{
+  background-color: rgb(226, 134, 13);
+width: 66%;
+}
+
+.inactive{
+  display: none;
+}
+.neighborhood{background-color: aquamarine;}
+   .sublocality{background-color: aqua;}
+   .locality{background-color: azure;}
+
+
+.main-map{
+  height: 300px;
+  
+  width: 100%;
+}
+
+
+
+
+
 #errorMessage {
   background-color: rgb(255, 202, 202);
   width: 400px;
