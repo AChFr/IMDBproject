@@ -1,13 +1,16 @@
 const router = require("express").Router()
 const Movie = require('../models/Movie.model')
 
-// router.get("/movie/:id", (req, res, next) => {
+router.get("/details/:movie.id", (req, res, next) => {
 
-//     Movie
-//         .find()
+const {id} = req.params
+
+    Movie
+        .findById()
+        .then(el => console.log(el))
     
 
-// })
+})
 
 
 
