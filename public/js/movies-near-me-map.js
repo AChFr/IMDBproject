@@ -1,39 +1,31 @@
-let map
-let geocoder
-let infowindow
-let adress
-let googleResponse
+
+
+let map, geocoder, infowindow, address, googleResponses
+
 const handler = new APIHandler()
 
 function initMap() {
     paintMap()
     getCoords()
-
-
 }
-
-
-
 
 function paintMap() {
     map = new google.maps.Map(document.querySelector(".main-map"), {
         zoom: 16,
-        center: { lat: 40.417950685105744, lng: -3.703645287872495 },
-    });
-
-    geocoder = new google.maps.Geocoder();
-    infowindow = new google.maps.InfoWindow();
+        center: { lat: 40.417950685105744, lng: -3.703645287872495 }
+    })
+    geocoder = new google.maps.Geocoder()
+    infowindow = new google.maps.InfoWindow()
 }
 
 function getCoords() {
-
     navigator.geolocation.getCurrentPosition(
-        geolocationDetails => centerMap(geolocationDetails),
+        geolocationDetails => getLocation(geolocationDetails),
         errorDetails => console.log('fallo --->', errorDetails)
     )
 }
 
-function centerMap(geolocationDetails) {
+function getLocation(geolocationDetails) {
 
     const { latitude, longitude } = geolocationDetails.coords
     const position = { lat: latitude, lng: longitude }
@@ -48,110 +40,81 @@ function centerMap(geolocationDetails) {
         .then((response) => {
 
             googleResponse = response.results
+            //googleResponse.shift()
 
             new Marker({ map, position })
-            askForMovies()
+
+            setQueryListeners()
+
         })
 
-
-
 }
 
-function askForMovies() {
-
-
-
-    googleResponse.shift()
-    console.log(googleResponse)
-
-
-    for (let i = 0; i < googleResponse.length; i++) {
-        const elm = googleResponse[i]
-
-        if (elm.address_components[0].types.includes('neighborhood')) {
-            console.log("BBBBBBBBB")
-            handler
-                .getMoviesByLocation(elm.address_components[0].long_name)
-                .then(resultados => {
-
-                    resultados.data.results.length != 0 ? console.log("resultados son", resultados) : null
-                })
-
-            // break
-        }
-
-        else if (elm.address_components[0].types.includes('sublocality')) {
-            console.log("CCCCCCCC")
-            handler
-                .getMoviesByLocation(elm.address_components[0].long_name)
-                .then(resultados => {
-
-                    resultados.data.results.length != 0 ? console.log("resultados son", resultados) : null
-                })
-            // break
-        }
-        else if (elm.address_components[0].types.includes('locality')) {
-            console.log("ddddddddd")
-            handler
-                .getMoviesByLocation(elm.address_components[0].long_name)
-                .then(resultados => {
-                    console.log("resultados son", resultados)
-                    resultados.data.results.length != 0 ? console.log("resultados son", resultados) : null
-                })
-            //break
-        }
-
-        else { console.log("NO HAY RESULTADOS") }
-    }
-
-
+function setQueryListeners() {
+    document.getElementById('neighborhood').addEventListener('click', () => moviesIn('neighborhood', ".results-neighborhood", googleResponse))
+    document.getElementById('sublocality').addEventListener('click', () => moviesIn('sublocality', ".results-sublocality", googleResponse))
+    document.getElementById('locality').addEventListener('click', () => moviesIn('locality', ".results-locality", googleResponse))
 }
 
-function showMovies(arr) {
 
-}
+function moviesIn(key, selector, arr) {
 
-function cardFormer(elm) {
-    let newCard = document.createElement("div") //card
-    newCard.setAttribute('class', "movie-info") //card
+    arr.forEach(elm => {
 
-    let newTitle = document.createElement("div") //titulo
-    newTitle.innerText = `titulo ${elm.title}` // titulo
+        const addressElement = elm.address_components[0]
 
-    let newActors = document.createElement("ul") //actores
-    elm.starlist.forEach((star, idx) => {
+        if (addressElement.types.includes(key)) {
 
-
+            handler
+                .getMoviesByLocation(addressElement.long_name)
+                .then(response => {
+                    console.log(response)
+                    response.data.results.length != 0 ? console.log(`resultados por ${key}  ${addressElement.long_name} son`, response.data.results) : console.log(`no hay resultados para  ${key}  ${addressElement.long_name}`)
+                    response.data.results.length != 0 ? cardFormer(selector, response.data.results) : null//errorFormer(field)
+                })
+        }
+        else { console.log("no hay coincidencias") }
     })
-    newActors.innerText = `OCCUPATION: ${elm.occupation}`
-    let newCartoon = document.createElement("div")
-    newCartoon.innerText = `CARTOON: ${elm.cartoon}`
-    let newWeapon = document.createElement("div")
-    newWeapon.innerText = `WEAPON: ${elm.weapon}`
-    let newId = document.createElement("div")
-    newId.innerText = `ID: ${elm.id}`
-
-
-
-    const inputs = document.querySelectorAll('#edit-character-form input')
-
-    let fieldId = inputs[0]
-    let fieldName = inputs[1]
-    let fieldOcc = inputs[2]
-    let fieldWeapon = inputs[3]
-    let fieldCartoon = inputs[4]
-
-    fieldId.value = elm.id
-    fieldName.value = elm.name
-    fieldOcc.value = elm.occupation
-    fieldWeapon.value = elm.weapon
-    fieldCartoon.checked = elm.cartoon
-
-    newCard.appendChild(newName)
-    newCard.appendChild(newOcc)
-    newCard.appendChild(newCartoon)
-    newCard.appendChild(newWeapon)
-    newCard.appendChild(newId)
-
-    document.querySelector(".characters-container").appendChild(newCard)
 }
+
+function cardFormer(node, arr) {
+
+    console.log(1, node)
+
+    document.querySelector(node).classList.remove("inactive")
+
+    console.log(2, `${node}`)
+
+    arr.forEach(elm => {
+        let newCarrouselItem = document.createElement("div")
+        newCarrouselItem.setAttribute('class', "carousel-item")
+
+        let newImage = document.createElement("figure")
+        newImage.innerHTML = `<img src="${elm.image}" class="d-block w-100" alt="${elm.title} image">` //imagen
+
+
+
+        let newCaption = document.createElement("div")//caption
+        newImage.newCaption = `<h5>${elm.title}</h5> <p>${elm.stars}</p>`
+
+
+        newCarrouselItem.appendChild(newImage)
+        newCarrouselItem.appendChild(newCaption)
+
+        document.getElementById(node).appendChild(newCarrouselItem)
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
