@@ -1,12 +1,57 @@
 body {
-  background-color: rgb(60, 79, 116);
+  background-image: url('../images/cinema-wallpaper-14.jpg');
+  background-size: cover;
   font-family: 'Montserrat', sans-serif;
+}
+
+#landing-title {
+  padding-top: 40px;
+  text-align: center;
+  font-size: 4em;
+  color: white;
+  font-weight: bold;
+}
+
+#landing-subtitle {
+  text-align: center;
+  font-size: 2em;
+  color: rgb(231, 161, 10);
+  padding-bottom: 10px;
+  font-weight: bold;
+}
+
+#slider {
+  display: flex;
+  flex-direction: row;
+}
+
+.results {
+  display: flex;
+  flex-direction: row;
+}
+
+#slider .results {
+  margin-left: 10px;
+}
+
+.carousel {
+  width: 200px;
+  height: 100px;
+}
+
+#results-neighborhood, #results-sublocality, #results-locality{
+  margin: 20px;
 }
 
 .navbar{
   background: linear-gradient(to right, #f7971e, #ffd200);
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-  margin-bottom: 50px;
+  margin-bottom: 30px;
+}
+
+.navbar-brand {
+  font-size: 1.6em;
+  font-weight: bold;
 }
 
 .random-row{
@@ -24,21 +69,18 @@ h1{
 }
 
 .logout {
-  border: 0;
-  background-color: transparent;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: rgb(180, 9, 9) !important;
+  background: transparent;
+  border: none;
 }
-
-
 
 .main-page{
   display: flex;
-
 }
 
-
-
 .map-buttons{
-  
   width: 33%;
   padding: 15px
 }
@@ -52,28 +94,41 @@ h1{
   width:100%
 }
 
-
-
 .inactive{
   display: none;
 }
-
 
 .main-map{
   height: 300px;
   width: 100%;
 }
 
-
 #result-random{
- 
   height: 400px;
 }
 
+.navbar-buttons {
+  text-decoration: none;
+  color: black;
+  background: transparent;
+  font-weight: bold;
+  padding: 10px;
+  margin: 0px, 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
 
+.btn-success {
+  background-color: black;
+  border: 0;
+}
 
-
-
+.btn-outline-success {
+  background-color: black !important;
+  border: 0 !important;
+}
 
 #errorMessage {
   background-color: rgb(255, 202, 202);
