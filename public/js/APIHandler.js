@@ -8,22 +8,21 @@ class APIHandler {
             //k_1clttgjh
             //k_lah58tyq
             //k_88qqmbwg
+            //k_9y821eyd
         })
     }
 
     getMoviesByLocation(currentLocation) {
-        return this.axiosApp.get(`AdvancedSearch/k_88qqmbwg?&locations=${currentLocation}`)
+        return this.axiosApp.get(`AdvancedSearch/k_9y821eyd?&locations=${currentLocation}`)
     }
     getRandomMovies() {
-        return this.axiosApp.get(`AdvancedSearch/k_88qqmbwg?title_type=feature&groups=top_250&count=250`)
+        return this.axiosApp.get(`AdvancedSearch/k_9y821eyd?title_type=feature&groups=top_250&count=250`)
     }
     getMovieDetails(movieID) {
-        return this.axiosApp.get(`Title/k_88qqmbwg/${movieID}`)
+        return this.axiosApp.get(`Title/k_9y821eyd/${movieID}`)
     }
     getActorDetails(actorID) {
-        return this.axiosApp.get(`Title/k_88qqmbwg/${actorID}/FullActor`)
-
-
+        return this.axiosApp.get(`Title/k_9y821eyd/${actorID}/FullActor`)
     }
 
 }
