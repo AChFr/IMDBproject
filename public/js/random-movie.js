@@ -32,21 +32,4 @@ function randomFormer(movie) {
 }
 
 
-    // let newCarrouselItem = document.createElement("div")
-    // newCarrouselItem.setAttribute('class', "carousel-item")
-
-    // let newImage = document.createElement("figure")
-    // newImage.innerHTML = `<img src="${elm.image}" class="d-block w-100" alt="${elm.title} image">` //imagen
-
-
-
-    // let newCaption = document.createElement("div")//caption
-    // newImage.newCaption = `<h5>${elm.title}</h5> <p>${elm.stars}</p>`
-
-
-    // newCarrouselItem.appendChild(newImage)
-    // newCarrouselItem.appendChild(newCaption)
-
-    // document.getElementById("result-random").appendChild(newCard)
-
 

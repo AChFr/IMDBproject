@@ -90,6 +90,10 @@ function cardFormer(selector, arr) {
         let newCarrouselItem = document.createElement("div")
         newCarrouselItem.setAttribute('class', "carousel-item")
 
+        //<a href="http:/details/${elm.id}/>
+        //</a>
+
+
         let newImage = document.createElement("figure")
         newImage.innerHTML = `<img src="${elm.image}" class="d-block w-100" alt="${elm.title} image">` //imagen
         let newCaption = document.createElement("div")//caption
