@@ -1,10 +1,13 @@
 const router = require("express").Router()
+const Movie = require('../models/Movie.model')
 
+// router.get("/movie/:id", (req, res, next) => {
 
-router.get("/:id", (req, res, next) => {
+//     Movie
+//         .find()
+    
 
-    res.send(" D E T A  LL E S ")
-})
+// })
 
 
 

@@ -1,5 +1,4 @@
 
-
 let map, geocoder, infowindow, address, googleResponses
 
 const handler = new APIHandler()

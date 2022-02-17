@@ -87,7 +87,7 @@ router.post('/log-in', (req, res, next) => {
 
 //////////////////////////  A U T H    L O G   O U T   /////////////////////
 router.post('/log-out', (req, res, next) => {
-    req.session.destroy(() => res.redirect('auth/log-in'))
+    req.session.destroy(() => res.redirect('/auth/log-in'))
 })
 
 module.exports = router
