@@ -1,6 +1,6 @@
 
 
-let map, geocoder, infowindow, address, googleResponse
+let map, geocoder, infowindow, address, googleResponses
 
 const handler = new APIHandler()
 
@@ -40,21 +40,20 @@ function getLocation(geolocationDetails) {
         .then((response) => {
 
             googleResponse = response.results
-            console.log(googleResponse)
-            googleResponse.shift()
+            //googleResponse.shift()
+
             new Marker({ map, position })
 
             setQueryListeners()
-
 
         })
 
 }
 
 function setQueryListeners() {
-    document.getElementById('neighborhood').addEventListener('click', () => moviesIn('neighborhood', "results-neighborhood", googleResponse))
-    document.getElementById('sublocality').addEventListener('click', () => moviesIn('sublocality', "results-sublocality", googleResponse))
-    document.getElementById('locality').addEventListener('click', () => moviesIn('locality', "results-locality", googleResponse))
+    document.getElementById('neighborhood').addEventListener('click', () => moviesIn('neighborhood', ".results-neighborhood", googleResponse))
+    document.getElementById('sublocality').addEventListener('click', () => moviesIn('sublocality', ".results-sublocality", googleResponse))
+    document.getElementById('locality').addEventListener('click', () => moviesIn('locality', ".results-locality", googleResponse))
 }
 
 
@@ -69,10 +68,10 @@ function moviesIn(key, selector, arr) {
             handler
                 .getMoviesByLocation(addressElement.long_name)
                 .then(response => {
+                    console.log(response)
                     response.data.results.length != 0 ? console.log(`resultados por ${key}  ${addressElement.long_name} son`, response.data.results) : console.log(`no hay resultados para  ${key}  ${addressElement.long_name}`)
                     response.data.results.length != 0 ? cardFormer(selector, response.data.results) : null//errorFormer(field)
                 })
-
         }
         else { console.log("no hay coincidencias") }
     })
@@ -80,7 +79,11 @@ function moviesIn(key, selector, arr) {
 
 function cardFormer(node, arr) {
 
-    document.querySelector`.${node}`.classList.remove("inactive")
+    console.log(1, node)
+
+    document.querySelector(node).classList.remove("inactive")
+
+    console.log(2, `${node}`)
 
     arr.forEach(elm => {
         let newCarrouselItem = document.createElement("div")

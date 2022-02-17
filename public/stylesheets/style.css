@@ -1,4 +1,6 @@
 
+
+
 .main-page{
   display: flex;
 
@@ -15,7 +17,7 @@
 }
 
 .results{
-  background-color: rgb(226, 134, 13);
+  background-color: rgba(255, 193, 7, 0.45);
 width: 66%;
 }
 
@@ -29,9 +31,15 @@ width: 66%;
 
 .main-map{
   height: 300px;
-  
   width: 100%;
 }
+
+
+#result-random{
+ 
+  height: 400px;
+}
+
 
 
 

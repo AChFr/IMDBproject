@@ -26,26 +26,30 @@
          </button>
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
                <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="/">Home</a>
                </li>
+
                <li class="nav-item">
                   <form action="/log-out" method="POST">
                      <button class="nav-link">Logout</button>
                   </form>
                </li>
-               <li><a href="http:/auth/sign-up">CREAR</a>
 
+               <li><a href="http:/auth/sign-up">CREAR</a></li>
 
-               </li>
                <li><a href="http:/auth/log-in">LOGIN</a></li>
+
                <li><a href="http:/user/profiles">PROFILES</a></li>
+
 
             </ul>
             <form class="d-flex">
-               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-               <button class="btn btn-outline-success" type="submit">Search</button>
+               <input class="form-control me-2" type="search" placeholder="enter something" aria-label="Search">
+               <button class="btn btn-outline-warning" type="submit">SEARCH</button>
             </form>
+            <button class="btn btn-outline-success" id="random-movie-btn">RANDOM</button>
          </div>
       </div>
    </nav>
@@ -54,6 +58,25 @@
 
 
    <div class="container">
+
+      <section id="result-random" class="inactive">
+
+         <div class="card  bg-warning mb-3" style="max-width: 50%;">
+            <div class="row g-0">
+               <div class="col-md-4">
+                  <a id="link-random"><img id="image-random" class="img-fluid rounded-start"></a>
+               </div>
+               <div class="col-md-8">
+                  <div class="card-body">
+                     <h5 id="title-random" class="card-title"></h5>
+                     <p id="plot-random" class="card-text"></p>
+                     <p class="card-text"><small class="text-muted" id="stars-random"></small></p>
+
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
 
 
 
@@ -67,6 +90,8 @@
    {{!-- BOOTSTRAP JS --}}
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
+
+   <script src="/js/random-movie.js"></script>
 
 </body>
 
