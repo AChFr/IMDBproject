@@ -1,5 +1,6 @@
 const router = require("express").Router()
 
+// router.get("/movie/:id", (req, res, next) => {
 
 router.get("/film/:movieId", (req, res, next) => {
     const { movieId } = req.params
@@ -15,5 +16,6 @@ router.get("/actor/:actorId", (req, res, next) => {
 
 })
 
+// /details/:actorId
 
 module.exports = router;

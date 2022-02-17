@@ -56,7 +56,7 @@ router.post('/:id/edit', isLoggedIn, fileUploader.single("imgFile"), (req, res, 
 
     User
         .findByIdAndUpdate(id, { username, email, oldPwd, newPwd1, newPwd2, imgFile, description }, { new: true })
-        .then(updatedUser => res.redirect(`/profiles`))
+        .then(updatedUser => res.redirect(`/user/profiles`))
         .catch(err => next(err))
 
     ///// checks if the new username is already in use///
@@ -109,7 +109,7 @@ router.post('/:id/edit', isLoggedIn, fileUploader.single("imgFile"), (req, res, 
 
 //////////////////////////  USER DETAILS  /////////////////////
 
-router.get('/:id', isLoggedIn, (req, res, next) => {
+router.get('/user/:id', isLoggedIn, (req, res, next) => {
 
     const { id } = req.params
 

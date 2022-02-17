@@ -1,5 +1,4 @@
 
-
 let map, geocoder, infowindow, address, googleResponses
 
 //const handler = new APIHandler()
@@ -71,7 +70,7 @@ function moviesIn(key, selector, arr) {
                 .then(response => {
                     console.log(response)
                     response.data.results.length != 0 ? console.log(`resultados por ${key}  ${addressElement.long_name} son`, response.data.results) : console.log(`no hay resultados para  ${key}  ${addressElement.long_name}`)
-                    response.data.results.length != 0 ? cardFormer(selector, response.data.results) : null//errorFormer(field)
+                    response.data.results.length != 0 ? cardFormer(selector, response.data.results) : null
                 })
         }
         else { console.log("no hay coincidencias") }
@@ -89,6 +88,7 @@ function cardFormer(selector, arr) {
     arr.forEach(elm => {
         let newCarrouselItem = document.createElement("div")
         newCarrouselItem.setAttribute('class', "carousel-item")
+        newCarrouselItem.setAttribute('style', 'background-color: rgb(231, 161, 10); padding: 20px; border-radius: 5%;')
 
         //<a href="http:/details/${elm.id}/>
         //</a>
@@ -96,11 +96,11 @@ function cardFormer(selector, arr) {
 
         let newImage = document.createElement("figure")
         newImage.innerHTML = `<img src="${elm.image}" class="d-block w-100" alt="${elm.title} image">` //imagen
-        let newCaption = document.createElement("div")
+        let newCaption = document.createElement("div")//caption
+        newCaption.setAttribute("style", "color: black;")
         newCaption.innerHTML = `<h5>${elm.title}</h5> <p>${elm.stars}</p>`
 
         newCarrouselItem.appendChild(newImage)
-
         newCarrouselItem.appendChild(newCaption)
 
 
