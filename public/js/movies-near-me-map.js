@@ -1,7 +1,7 @@
 
 let map, geocoder, infowindow, address, googleResponses
 
-const handler = new APIHandler()
+//const handler = new APIHandler()
 
 function initMap() {
     paintMap()
@@ -50,9 +50,9 @@ function getLocation(geolocationDetails) {
 }
 
 function setQueryListeners() {
-    document.getElementById('neighborhood').addEventListener('click', () => moviesIn('neighborhood', ".results-neighborhood", googleResponse))
-    document.getElementById('sublocality').addEventListener('click', () => moviesIn('sublocality', ".results-sublocality", googleResponse))
-    document.getElementById('locality').addEventListener('click', () => moviesIn('locality', ".results-locality", googleResponse))
+    document.getElementById('neighborhood').addEventListener('click', () => moviesIn('neighborhood', "results-neighborhood", googleResponse))
+    document.getElementById('sublocality').addEventListener('click', () => moviesIn('sublocality', "results-sublocality", googleResponse))
+    document.getElementById('locality').addEventListener('click', () => moviesIn('locality', "results-locality", googleResponse))
 }
 
 
@@ -61,6 +61,7 @@ function moviesIn(key, selector, arr) {
     arr.forEach(elm => {
 
         const addressElement = elm.address_components[0]
+
 
         if (addressElement.types.includes(key)) {
 
@@ -76,32 +77,36 @@ function moviesIn(key, selector, arr) {
     })
 }
 
-function cardFormer(node, arr) {
+function cardFormer(selector, arr) {
 
-    console.log(1, node)
 
-    document.querySelector(node).classList.remove("inactive")
 
-    console.log(2, `${node}`)
+    document.querySelector(`.${selector}`).classList.remove("inactive")
+    let carrousel = document.getElementById(selector)
+
 
     arr.forEach(elm => {
         let newCarrouselItem = document.createElement("div")
         newCarrouselItem.setAttribute('class', "carousel-item")
 
+        //<a href="http:/details/${elm.id}/>
+        //</a>
+
+
         let newImage = document.createElement("figure")
         newImage.innerHTML = `<img src="${elm.image}" class="d-block w-100" alt="${elm.title} image">` //imagen
-
-
-
-        let newCaption = document.createElement("div")//caption
-        newImage.newCaption = `<h5>${elm.title}</h5> <p>${elm.stars}</p>`
-
+        let newCaption = document.createElement("div")
+        newCaption.innerHTML = `<h5>${elm.title}</h5> <p>${elm.stars}</p>`
 
         newCarrouselItem.appendChild(newImage)
+
         newCarrouselItem.appendChild(newCaption)
 
-        document.getElementById(node).appendChild(newCarrouselItem)
+
+        carrousel.appendChild(newCarrouselItem)
+
     })
+    carrousel.firstElementChild.classList.add("active")
 }
 
 

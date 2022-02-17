@@ -6,27 +6,24 @@ class APIHandler {
             //
             //k_3hj01a38
             //k_1clttgjh
-
-            //ver el tema del /en/
+            //k_lah58tyq
+            //k_88qqmbwg
         })
     }
 
     getMoviesByLocation(currentLocation) {
-        return this.axiosApp.get(`AdvancedSearch/k_3hj01a38?&locations=${currentLocation}`)
+        return this.axiosApp.get(`AdvancedSearch/k_88qqmbwg?&locations=${currentLocation}`)
     }
-
     getRandomMovies() {
-        return this.axiosApp.get(`AdvancedSearch/k_3hj01a38?title_type=feature&groups=top_250&count=250`)
+        return this.axiosApp.get(`AdvancedSearch/k_88qqmbwg?title_type=feature&groups=top_250&count=250`)
     }
+    getMovieDetails(movieID) {
+        return this.axiosApp.get(`Title/k_88qqmbwg/${movieID}`)
+    }
+    getActorDetails(actorID) {
+        return this.axiosApp.get(`Title/k_88qqmbwg/${actorID}/FullActor`)
 
-    getMovieFiltered(param) { }
+
+    }
 
 }
-
-
-
-
-
-
-
-
