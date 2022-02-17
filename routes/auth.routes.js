@@ -16,45 +16,45 @@ router.post('/sign-up', fileUploader.single("imgFile"), (req, res, next) => {
 
     const { username, email, pwd1, pwd2, imgFile } = req.body
 
-        User
-            .findOne({ username })
-            .then(result => {
+    User
+        .findOne({ username })
+        .then(result => {
 
-                if (result) {
+            if (result) {
 
-                    req.body.errorMessage = "This username is already in use"
+                req.body.errorMessage = "This username is already in use"
 
-                    res.render('auth/auth-signin', req.body)
-                    return;
-                }
+                res.render('auth/auth-signin', req.body)
+                return;
+            }
 
-                else {
-                    return bcrypt.genSalt(saltRounds)
-                }
+            else {
+                return bcrypt.genSalt(saltRounds)
+            }
+        })
+        //salta aquí, intenta ejecutar el hash, da error a pesar de que debería saltar el res.render del if
+
+        .then(salt => salt && bcrypt.hash(pwd1, salt))
+        .then(hashedPassword => {
+
+            return User.create({
+                ...req.body, password: hashedPassword,
+                profileImg: req.file?.path || 'https://res.cloudinary.com/dpfx8essu/image/upload/v1644855394/kcijzssglljtiteaklva.png'
             })
-            //salta aquí, intenta ejecutar el hash, da error a pesar de que debería saltar el res.render del if
-
-            .then(salt => salt && bcrypt.hash(pwd1, salt))
-            .then(hashedPassword => {
-                
-                return User.create({
-                    ...req.body, password: hashedPassword,
-                    profileImg: req.file?.path || 'https://res.cloudinary.com/dpfx8essu/image/upload/v1644855394/kcijzssglljtiteaklva.png'
-                })
-            })
-            .then(() => {
-                transporter.sendMail({
-                    from: "imdbprojectteam@gmail.com",
-                    to: email,
-                    subject: `Welcome to IMDBProject!`,
-                    text: `${username}, welcome to IMDBProject! Your Password is ${pwd1}`,
-                    html: "<p>" + `${username}, welcome to IMDBProject! Your Password is ${pwd1}` + "</p>"
-                })
-
-                res.redirect('/')
+        })
+        .then(() => {
+            transporter.sendMail({
+                from: "imdbprojectteam@gmail.com",
+                to: email,
+                subject: `Welcome to IMDBProject!`,
+                text: `${username}, welcome to IMDBProject! Your Password is ${pwd1}`,
+                html: "<p>" + `${username}, welcome to IMDBProject! Your Password is ${pwd1}` + "</p>"
             })
 
-            .catch(error => next(error))
+            res.redirect('/')
+        })
+
+        .catch(error => next(error))
 })
 
 /////////////////////// A U T H    L O G   I N  /////////////////////////
@@ -79,7 +79,7 @@ router.post('/log-in', (req, res, next) => {
             } else {
 
                 req.session.currentUser = user
-                res.render('index')
+                res.redirect("/")
             }
         })
         .catch(error => next(error))
@@ -87,7 +87,7 @@ router.post('/log-in', (req, res, next) => {
 
 //////////////////////////  A U T H    L O G   O U T   /////////////////////
 router.post('/log-out', (req, res, next) => {
-    req.session.destroy(() => res.redirect('/log-in'))
+    req.session.destroy(() => res.redirect('auth/log-in'))
 })
 
 module.exports = router

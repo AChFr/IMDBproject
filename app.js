@@ -32,14 +32,13 @@ const index = require("./routes/route.index");
 app.use("/", index);
 
 const auth = require("./routes/auth.routes")
-app.use("/", auth)
+app.use("/auth", auth)
 
 const user = require("./routes/user.routes")
-app.use("/", user)
+app.use("/user", user)
 
-const movieApi = require("./routes/api.routes")
-app.use(`/https://imdb-api.com/API/AdvancedSearch/${process.env.IMDB_KEY}`, movieApi)
-
+const details = require("./routes/details.routes")
+app.use("/details", details)
 
 
 

@@ -27,7 +27,7 @@ function randomFormer(movie) {
     document.getElementById("title-random").innerText = movie.title
     document.getElementById("plot-random").innerText = movie.plot
     document.getElementById("stars-random").innerText = movie.stars
-    document.getElementById("link-random").setAttribute("href", `/film/${movie.id}`)
+    document.getElementById("link-random").setAttribute("href", `/details/${movie.id}`)
 
 }
 
