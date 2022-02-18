@@ -40,11 +40,8 @@ function getLocation(geolocationDetails) {
 
             googleResponse = response.results
             //googleResponse.shift()
-
             new Marker({ map, position })
-
             setQueryListeners()
-
         })
 
 }
@@ -78,29 +75,22 @@ function moviesIn(key, selector, arr) {
 
 function cardFormer(selector, arr) {
 
-
-
     document.querySelector(`.${selector}`).classList.remove("inactive")
     let carrousel = document.getElementById(selector)
-
 
     arr.forEach(elm => {
         let newCarrouselItem = document.createElement("div")
         newCarrouselItem.setAttribute('class', "carousel-item")
         newCarrouselItem.setAttribute('style', 'background-color: rgb(231, 161, 10); padding: 20px; border-radius: 5%;')
 
-
-
-
         let newImage = document.createElement("figure")
         newImage.innerHTML = `<img src="${elm.image}" class="d-block w-100" alt="${elm.title} image">`
+        let newCaption = document.createElement("div")
         newCaption.setAttribute("style", "color: black;")
         newCaption.innerHTML = `<h5>${elm.title}</h5> <p>${elm.stars}</p>`
 
         newCarrouselItem.appendChild(newImage)
         newCarrouselItem.appendChild(newCaption)
-
-
         carrousel.appendChild(newCarrouselItem)
 
     })

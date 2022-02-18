@@ -2,7 +2,7 @@ class APIHandler {
 
     constructor() {
         this.axiosApp = axios.create({
-            baseURL: `https://imdb-api.com/API/`
+            baseURL: `/imdb-api.com/API/`
             //
             //k_3hj01a38
             //k_1clttgjh

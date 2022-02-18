@@ -39,7 +39,7 @@ router.post('/sign-up', fileUploader.single("imgFile"), (req, res, next) => {
 
             return User.create({
                 ...req.body, password: hashedPassword,
-                profileImg: req.file?.path || 'https://res.cloudinary.com/dpfx8essu/image/upload/v1644855394/kcijzssglljtiteaklva.png'
+                profileImg: req.file?.path || '/res.cloudinary.com/dpfx8essu/image/upload/v1644855394/kcijzssglljtiteaklva.png'
             })
         })
         .then(() => {
