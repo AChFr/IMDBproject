@@ -62,7 +62,6 @@ function moviesIn(key, selector, arr) {
 
         const addressElement = elm.address_components[0]
 
-
         if (addressElement.types.includes(key)) {
 
             handler
@@ -90,13 +89,11 @@ function cardFormer(selector, arr) {
         newCarrouselItem.setAttribute('class', "carousel-item")
         newCarrouselItem.setAttribute('style', 'background-color: rgb(231, 161, 10); padding: 20px; border-radius: 5%;')
 
-        //<a href="http:/details/${elm.id}/>
-        //</a>
+
 
 
         let newImage = document.createElement("figure")
-        newImage.innerHTML = `<img src="${elm.image}" class="d-block w-100" alt="${elm.title} image">` //imagen
-        let newCaption = document.createElement("div")//caption
+        newImage.innerHTML = `<img src="${elm.image}" class="d-block w-100" alt="${elm.title} image">`
         newCaption.setAttribute("style", "color: black;")
         newCaption.innerHTML = `<h5>${elm.title}</h5> <p>${elm.stars}</p>`
 

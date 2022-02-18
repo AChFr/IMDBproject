@@ -1,7 +1,3 @@
-
-
-
-
 document.addEventListener("load", actorDetails())
 
 
@@ -9,26 +5,18 @@ function actorDetails() {
 
     const actorID = document.getElementById("actor-id").innerText
     handler
-        .getMovieDetails(actorID)
+        .getActorDetails(actorID)
         .then(result => {
-            console.log(result)
-            // fillMovieDetails(result.data)
+            fillActorDetails(result.data.results[0])
         })
 }
 
-// function fillMovieDetails(obj) {
+function fillActorDetails(obj) {
 
-//     document.getElementById("movie-title").innerText = obj.title
-//     document.getElementById("movie-genre").innerText = obj.genres
-//     document.getElementById("movie-plot").innerText = obj.plot
-
-//     obj.starList.forEach(elm => {
-//         const star = document.createElement("li")
-//         star.innerHTML = `<a href="http:/details/actor/${elm.id}"><strong>${elm.name}</strong></a>`
-//         document.getElementById("movie-stars").appendChild(star)
-//     });
-
-//     document.getElementById("movie-year").innerText = obj.year
-//     document.getElementById("movie-rating").innerText = obj.imDbRating
-//     document.getElementById("movie-image").setAttribute("src", `${obj.image}`)
-// }
+    document.getElementById("actor-name").innerText = obj.title
+    document.getElementById("name-input").setAttribute("value", `${obj.title}`)
+    document.getElementById("actor-description").innerText = obj.description
+    document.getElementById("description-input").setAttribute("value", `${obj.description}`)
+    document.getElementById("actor-image").setAttribute("src", `${obj.image}`)
+    document.getElementById("image-input").setAttribute("value", `${obj.image}`)
+}

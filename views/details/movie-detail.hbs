@@ -18,7 +18,20 @@
                 <p class="card-text">IMDB Rating: <span id="movie-rating"></span></p>
                 <p class="card-text"><small class="text-muted">IMDB ID:</small><small id="movie-id"
                         class="text-muted">{{movieId}}</small></p>
+
+
+
+
             </div>
+            <form action="/details/film/{{movieId}}" method="POST">
+
+                <input id="name-input" type="hidden" name='name'>
+                <input id="plot-input" type="hidden" name='plot'>
+                <input id="year-input" type="hidden" name='releaseYear'>
+                <input id="image-input" type="hidden" name='image'>
+                <input class="submit-btn btn btn-lg btn-success" type="submit" value="ADD TO FAVOURITES">
+
+            </form>
         </div>
 
         <div class="col-md-4">
@@ -31,5 +44,15 @@
 </div>
 
 
+{{#if errorMessage}}
+<div id="errorMessage">
+    <p>{{errorMessage}}</p>
+</div>
+{{/if}}
+{{#if successMessage}}
+<div id="successMessage">
+    <p>{{successMessage}}</p>
+</div>
+{{/if}}
 
 <script src="/js/movie-details.js"></script>
