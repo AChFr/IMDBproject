@@ -1,4 +1,8 @@
+<div class="titlee">
 <h1>Log-in</h1>
+</div>
+
+<div class="box-form">
 <form action="/auth/log-in" method="POST">
 
     <div class="card" style="width: 30rem;">
@@ -17,10 +21,16 @@
         </ul>
     </div>
     <hr>
+
+    <div class="submit-buttons">
     <input class="submit-btn btn btn-lg btn-warning edit" type="submit" value="LOG-IN">
     <br><br>
-    <a href="/">BACK</a>
+    <a class="submit-btn btn btn-lg btn-warning edit" href="/">BACK</a>
+    </div>
+
 </form>
+
+</div>
 
 {{#if errorMessage}}
 <div id="errorMessage">

@@ -12,7 +12,6 @@ User.syncIndexes();
 //////////////////////////////  U S E R  P R O F I L E S  ////////////////
 router.get('/profiles', isLoggedIn, (req, res, next) => {
 
-
     const currentUser = req.session.currentUser
 
     User
@@ -109,7 +108,7 @@ router.post('/:id/edit', isLoggedIn, fileUploader.single("imgFile"), (req, res, 
 
 //////////////////////////  USER DETAILS  /////////////////////
 
-router.get('/user/:id', isLoggedIn, (req, res, next) => {
+router.get('/:id', isLoggedIn, (req, res, next) => {
 
     const { id } = req.params
 
