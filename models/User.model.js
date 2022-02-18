@@ -30,11 +30,12 @@ const userSchema = new Schema(
       default: "USER"
     },
 
-    favoritePlaces: [{ type: Schema.Types.ObjectId, ref: 'Place' }]
-    ,
-    favoriteMovies: [{ type: Schema.Types.ObjectId, ref: 'Movie' }]
-    ,
-    favoriteActors: [{ type: Schema.Types.ObjectId, ref: 'Actor' }]
+
+    favoriteMovies: [{ type: Schema.Types.ObjectId, ref: 'Movie' }],
+
+    favoriteActors: [{ type: Schema.Types.ObjectId, ref: 'Actor' }],
+
+    comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
 
   },
   {

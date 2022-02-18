@@ -22,7 +22,9 @@ class APIHandler {
         return this.axiosApp.get(`Title/k_9y821eyd/${movieID}`)
     }
     getActorDetails(actorID) {
-        return this.axiosApp.get(`Title/k_9y821eyd/${actorID}/FullActor`)
+        return this.axiosApp.get(`Search/k_1clttgjh/${actorID}`)
+
+
     }
 
 }

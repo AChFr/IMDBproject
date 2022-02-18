@@ -1,0 +1,35 @@
+<h1 id="page-header"></h1>
+
+<div class="card mb-3 actor-card text-dark bg-warning" style="max-width: 1000px;">
+    <div class="row g-0">
+
+        <div class="col-md-4">
+            <div class="card-body">
+                <h2 id="actor-name" class="card-title"></h2>
+            </div><br><br>
+            <p id="actor-description" class="card-text"></p>
+            <br><br><br><br><br>
+            <p class="card-text"><small class="text-muted">IMDB ID:</small><small id="actor-id"
+                    class="text-muted">{{actorId}}</small></p>
+
+            <form action="/details/actor/{{actorId}}" method="POST">
+
+                <input id="name-input" type="hidden" name='name'>
+                <input id="description-input" type="hidden" name='description'>
+                <input id="image-input" type="hidden" name='image'>
+                <input class="submit-btn btn btn-lg btn-success" type="submit" value="ADD TO FAVOURITES">
+
+            </form>
+        </div>
+
+        <div class="col-md-6">
+            <img id="actor-image" class="img-fluid rounded-start">
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+
+<script src="/js/actor-details.js"></script>

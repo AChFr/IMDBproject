@@ -13,7 +13,7 @@ function getRandomMovie() {
     handler
         .getRandomMovies()
         .then(response => {
-
+            console.log(response)
             i = Math.floor(Math.random() * (response.data.results.length + 1))
             console.log(i)
 
